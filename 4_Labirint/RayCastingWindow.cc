@@ -23,7 +23,7 @@ void RayCastingWindow::render()
 
 	SDL_SetRenderDrawBlendMode(_renderer.get(), SDL_BLENDMODE_BLEND);
 
-	double sd = width() / ( 2 * tan ( _player->DEFAULT_FOV / 2 ) );
+	double sd = width() / ( 2 * tan ( _player->DEFAULT_FOV / 2*3.14/180 ) );
 		double ry = 0, rx = 0, dy = 0, dx = 0, D_h = 0, D_v = 0, h = 0, gamma = 0, betta = 0, tx = 0, d=0;
 
 		for(int col = 0; col < width(); ++col){
