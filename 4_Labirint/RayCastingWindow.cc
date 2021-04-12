@@ -24,10 +24,10 @@ void RayCastingWindow::render()
 	SDL_SetRenderDrawBlendMode(_renderer.get(), SDL_BLENDMODE_BLEND);
 
 	double sd = width() / ( 2 * tan ( _player->DEFAULT_FOV / 2 ) );
-		double ry = 0, rx = 0, dy = 0, dx = 0, D_h = 0, D_v = 0, h = 0, gamma = 0, betta = 0, tx = 0;
+		double ry = 0, rx = 0, dy = 0, dx = 0, D_h = 0, D_v = 0, h = 0, gamma = 0, betta = 0, tx = 0, d=0;
 
 		for(int col = 0; col < width(); ++col){
-			gamma = atan( ( col - width() / 2 ) / sd );
+			gamma = atan2( ( col - width() / 2 ) , sd );
 
 			betta = _player->dir() + gamma;
 
@@ -83,12 +83,13 @@ void RayCastingWindow::render()
 				D_v = sqrt( pow( rx - _player->x(), 2 ) + pow( ry - _player->y(), 2 ) );
 
 			}
+			d = sd/cos(gamma);
 			if(D_v < D_h){
-				h = sd * 0.5 / D_v;
+				h = d / D_v;
 				tx = ry - floor(ry);
 			}
 			else{
-				h = sd * 0.5 / D_h;
+				h = d / D_h;
 			}
 
 			draw_textured_col(col, h, tx);
